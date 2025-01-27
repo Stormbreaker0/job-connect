@@ -5,14 +5,16 @@ namespace App\Http\Controllers;
 use App\Http\Requests\SeekerLoginRequest;
 use App\Http\Requests\SeekerRegistrationRequest;
 use App\Models\User;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Http\Request;
 
-use function Laravel\Prompts\password;
-use Illuminate\Support\Facades\Auth;
 
 class UserController extends Controller
 {   
     const JOB_SEEKER = 'seeker';
+    const JOB_POSTER = 'employer';
 
     // create seeker
     public function createSeeker()
@@ -20,18 +22,45 @@ class UserController extends Controller
         return view('user.seeker-register');
     }
 
-    // store data from request to database
+    // create employer
+    public function createEmployer()
+    {
+        return view('user.employer-register');
+    }
+
+    // store seeker data from request to database
    public function storeSeeker(SeekerRegistrationRequest $request)
    {    
-        User::create([
+        $user = User::create([
             'name' =>  $request->name,
             'email' => $request->email,
             'password' => bcrypt($request->password),
             'user_type' => self::JOB_SEEKER,
         ]);
 
-        return back();
+        $user->sendEmailVerificationNotification();
+
+        return redirect()->route('login')->with('message', 'Registration successful');
    }
+
+   public function storeEmployer(SeekerRegistrationRequest $request)
+    {
+        $user = User::create([
+            'name' => request('name'),
+            'email' => request('email'),
+            'password' => bcrypt(request('password')),
+            'user_type' => self::JOB_POSTER,
+            'user_trial' => now()->addWeek()
+        ]);
+
+        // Auth::login($user);
+
+        $user->sendEmailVerificationNotification();
+
+        // return response()->json('success');
+
+        return redirect()->route('login')->with('successMessage','Your account was created');
+    }
 
    public function login()
    {
@@ -39,11 +68,37 @@ class UserController extends Controller
    }
 
    // process login
-   public function postLogin(SeekerLoginRequest $request)
-   {
-        $credentials = $request->only('email', 'password');    
-        if(Auth::attempt($credentials)){
-            return redirect() -> intended('dashboard');
+   public function postLogin(Request $request)
+    {
+        $request->validate([
+            'email' => 'required',
+            'password' => 'required'
+        ]);
+
+        $credentails = $request->only('email', 'password');
+
+        if(Auth::attempt($credentails)) {
+            if(!Auth::user()->email_verified_at)
+            {
+                return redirect()->to('/verify');
+            }
+            if(Auth::user()->user_type == 'employer') {
+                return redirect()->to('dashboard');
+            }else {
+                return redirect()->to('/');
+            }
         }
-   }
+
+        return 'Wrong email or password';
+    }
+
+    //logout
+    public function logout()
+    {
+        Auth::logout();
+        return redirect()->to('/');
+
+       // return redirect()->route('login');
+    }
+
 }

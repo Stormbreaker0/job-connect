@@ -6,8 +6,7 @@ use App\Http\Requests\SeekerLoginRequest;
 use App\Http\Requests\SeekerRegistrationRequest;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Hash;
+
 use Illuminate\Http\Request;
 
 
@@ -36,11 +35,16 @@ class UserController extends Controller
             'email' => $request->email,
             'password' => bcrypt($request->password),
             'user_type' => self::JOB_SEEKER,
+            'user_trial' => now()->addWeek()
         ]);
+
+        Auth::login($user);
 
         $user->sendEmailVerificationNotification();
 
-        return redirect()->route('login')->with('message', 'Registration successful');
+        return response()->json('success');
+
+        //return redirect()->route('verification.notice')->with('message', 'Registration successful');
    }
 
    public function storeEmployer(SeekerRegistrationRequest $request)
@@ -53,13 +57,13 @@ class UserController extends Controller
             'user_trial' => now()->addWeek()
         ]);
 
-        // Auth::login($user);
+        Auth::login($user);
 
         $user->sendEmailVerificationNotification();
 
-        // return response()->json('success');
+        return response()->json('success');
 
-        return redirect()->route('login')->with('successMessage','Your account was created');
+        // return redirect()->route('verification.notice')->with('successMessage','Your account was created');
     }
 
    public function login()

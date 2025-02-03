@@ -7,7 +7,7 @@
         <div class="col-md-6">
             <h1>Looking for an employee?</h1>
             <h3>Please create an account</h3>
-            <img src="{{asset('image/register.png')}}">
+            <img src={{asset('image/register.jpg')}} class="img-responsibe" width="600">
         </div>
 
         <div class="col-md-6">
@@ -40,6 +40,9 @@
                         <div class="form-group">
                             <button class="btn btn-dark" id="btnRegister"> Register</button>
                         </div>
+                        <div class="form-group mt-3">
+                            <p class="text-center">Already have an account? <a href="{{ route('login') }}">Login here</a></p>
+                        </div>
                     </div>
                 </form>
             </div>
@@ -47,6 +50,7 @@
         </div>
     </div>
 </div>
+
 <script>
     var url = "{{route('store.employer')}}";
     document.getElementById("btnRegister").addEventListener("click", function(event) {

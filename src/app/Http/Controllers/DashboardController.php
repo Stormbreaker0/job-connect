@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+
+use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Routing\Controller;
@@ -18,23 +20,23 @@ class DashboardController extends Controller
         return view('dashboard');
     }
 
-    // public function verify()
-    // {
-    //     return view('user.verify');
-    // }
+    public function verify()
+    {
+        return view('user.verify');
+    }
 
-    // public function resend(Request $request)
-    // {
-    //     $user = Auth::user();
+    public function resend(Request $request)
+    {
+        $user = Auth::user();
 
-    //     if($user->hasVerifiedEmail()) {
-    //         return redirect()->route('home')->with('success','Your email was verified');
-    //     }
+        if($user->hasVerifiedEmail()) {
+            return redirect()->route('home')->with('success','Your email was verified');
+        }
 
-    //     $user->sendEmailVerificationNotification();
+        $user->sendEmailVerificationNotification();
 
-    //     return back()->with('success','Verfication link sent successfully');
+        return back()->with('success','Verfication link sent successfully');
 
-    // }
+    }
 }
  

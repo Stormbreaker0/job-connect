@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Middleware\isEmployer;
 use App\Mail\PurchaseMail;
+use App\Http\Middleware\donotAllowUserToMakePayment;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Stripe\Checkout\Session;
@@ -24,6 +25,7 @@ class SubscriptionController extends Controller
     public function __construct()
     {
         $this->middleware(['auth', isEmployer::class]);
+        $this->middleware(['auth', donotAllowUserToMakePayment::class])->except('subscribe');
     }
 
     public function subscribe()

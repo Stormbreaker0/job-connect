@@ -3,7 +3,7 @@
 @section('content')
 <div class="container mt-5">
     <div class="jumbotron text-center bg-light p-5 rounded">
-        <h1 class="display-4">Welcome to Job Linker</h1>
+        <h1 class="display-4">Welcome to Job-Connect</h1>
         <p class="lead">Connecting job seekers with employers seamlessly.</p>
         <hr class="my-4">
         <p>Find your dream job or the perfect candidate today.</p>

@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Job portal</title>
+    <title>Job-Connect</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
     <link href="https://unpkg.com/filepond@^4/dist/filepond.css" rel="stylesheet" />
     <style>
@@ -26,7 +26,7 @@
 
     <nav class="navbar navbar-expand-lg bg-dark shadow-lg" data-bs-theme="dark">
         <div class="container">
-            <a class="navbar-brand" href="/">Job Linker</a>
+            <a class="navbar-brand" href="/">Job-Connect</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
@@ -88,7 +88,7 @@
             <div class="row">
                 <div class="col-md-4">
                     <h5>About Us</h5>
-                    <p>Job Linker is a leading job portal connecting job seekers with employers.</p>
+                    <p>Job-Connect is a leading job portal connecting job seekers with employers.</p>
                 </div>
                 <div class="col-md-4">
                     <h5>Quick Links</h5>
@@ -106,7 +106,7 @@
                 </div>
             </div>
             <div class="mt-3">
-                <p>&copy; 2025 Job Linker. All rights reserved.</p>
+                <p>&copy; 2025 Job-Connect. All rights reserved.</p>
             </div>
         </div>
     </footer>

@@ -3,11 +3,15 @@
 namespace App\Http\Controllers;
 
 use App\Http\Middleware\isEmployer;
+use App\Mail\PurchaseMail;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Stripe\Checkout\Session;
 use Stripe\Stripe;
 use Illuminate\Support\Facades\URL;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
+use App\Models\User;
 
 
 class SubscriptionController extends Controller
@@ -116,7 +120,24 @@ class SubscriptionController extends Controller
 
     public function paymentSuccess(Request $request)
     {
-        // update db
+        $plan = $request->plan;
+        $billingEnds = $request->billing_ends;
+        User::where('id', Auth::user()->id)->update([
+            'plan' => $plan,
+            'billing_ends' => $billingEnds,
+            'status' => 'paid'
+        ]);
+
+        try {
+            Mail::to(Auth::user())->queue(new PurchaseMail($plan,$billingEnds));
+
+        }catch (\Exception $e) {
+            echo $e->getMessage();
+            return response()->json($e);
+        }
+
+        // redirect back
+        return redirect()->route('dashboard')->with('success', 'Payment was successful!');
     }
 
     public function cancel(Request $request)

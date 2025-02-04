@@ -28,7 +28,7 @@
                     <h4>Roles and Responsibilities</h4>
                     {!!$listing->roles!!}
 
-                    <p class="card-text mt-4">Application closing date: {{$listing->application_close_date}}</p>
+                    <p class="card-text mt-4">Application closing date: {{$listing->application_deadline}}</p>
                     @if(Auth::check())
                     @if(auth()->user()->resume)
                     <form action="{{route('applicantion.submit',[$listing->id])}}" method="POST">@csrf

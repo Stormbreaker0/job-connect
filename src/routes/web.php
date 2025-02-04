@@ -6,7 +6,7 @@ use Illuminate\Support\Facades\Route;
 use Illuminate\Foundation\Auth\EmailVerificationRequest;
 use App\Http\Middleware\CheckAuth;
 use App\Http\Controllers\SubscriptionController;
-use App\Http\Middleware\isEmployer;
+use App\Http\Controllers\PostJobController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -48,8 +48,8 @@ Route::post('/logout', [UserController::class, 'logout'])->name('logout');
 // Route::post('user/password', [UserController::class, 'changePassword'])->name('user.password')->middleware('auth');
 // Route::post('upload/resume', [UserController::class, 'uploadResume'])->name('upload.resume')->middleware('auth');
 
-Route::get('register/resend-verification', [DashboardController::class,'resendVerification'])
-->name('register.resend-verification');
+Route::get('/register/resend-verification', [DashboardController::class,'resendVerification'])
+->name('/register.resend-verification');
 
 
 # DASHBOARD
@@ -63,8 +63,13 @@ Route::get('/resend/verification/email',[DashboardController::class, 'resend'])-
 
 # SUBSCRIPTION AND PAYMENT
 Route::get('/subscribe', [SubscriptionController::class, 'subscribe'])->name('subscribe');
-Route::get('pay/weekly', [SubscriptionController::class, 'initiatePayment'])->name('pay.weekly');
-Route::get('pay/monthly', [SubscriptionController::class, 'initiatePayment'])->name('pay.monthly');
-Route::get('pay/yearly', [SubscriptionController::class, 'initiatePayment'])->name('pay.yearly');
-Route::get('payment/success', [SubscriptionController::class, 'paymentSuccess'])->name('payment.success');
-Route::get('payment/cancel', [SubscriptionController::class, 'cancel'])->name('payment.cancel');
+Route::get('/pay/weekly', [SubscriptionController::class, 'initiatePayment'])->name('pay.weekly');
+Route::get('/pay/monthly', [SubscriptionController::class, 'initiatePayment'])->name('pay.monthly');
+Route::get('/pay/yearly', [SubscriptionController::class, 'initiatePayment'])->name('pay.yearly');
+Route::get('/payment/success', [SubscriptionController::class, 'paymentSuccess'])->name('payment.success');
+Route::get('/payment/cancel', [SubscriptionController::class, 'cancel'])->name('payment.cancel');
+
+
+# JOB ROUTES
+Route::get('job/create', [PostJobController::class, 'create'])->name('job.create');
+Route::post('job/create', [PostJobController::class, 'store'])->name('job.store');

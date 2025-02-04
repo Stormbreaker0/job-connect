@@ -2,11 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\SeekerLoginRequest;
-use App\Http\Requests\SeekerRegistrationRequest;
+use App\Http\Requests\LoginFormRequest;
+use App\Http\Requests\RegistrationFormRequest;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
-
 use Illuminate\Http\Request;
 
 
@@ -28,7 +27,7 @@ class UserController extends Controller
     }
 
     // store seeker data from request to database
-   public function storeSeeker(SeekerRegistrationRequest $request)
+   public function storeSeeker(RegistrationFormRequest $request)
    {    
         $user = User::create([
             'name' =>  $request->name,
@@ -47,12 +46,12 @@ class UserController extends Controller
         //return redirect()->route('verification.notice')->with('message', 'Registration successful');
    }
 
-   public function storeEmployer(SeekerRegistrationRequest $request)
+   public function storeEmployer(RegistrationFormRequest $request)
     {
         $user = User::create([
             'name' => request('name'),
             'email' => request('email'),
-            'password' => bcrypt(request('password')),
+            'password' => bcrypt($request->password),
             'user_type' => self::JOB_POSTER,
             'user_trial' => now()->addWeek()
         ]);
@@ -72,12 +71,12 @@ class UserController extends Controller
    }
 
    // process login
-   public function postLogin(Request $request)
+   public function postLogin(LoginFormRequest $request)
     {
-        $request->validate([
-            'email' => 'required',
-            'password' => 'required'
-        ]);
+        // $request->validate([
+        //     'email' => 'required|email',
+        //     'password' => 'required'
+        // ]);
 
         $credentails = $request->only('email', 'password');
 
@@ -100,9 +99,8 @@ class UserController extends Controller
     public function logout()
     {
         Auth::logout();
+        
         return redirect()->to('/');
-
-       // return redirect()->route('login');
     }
 
 }

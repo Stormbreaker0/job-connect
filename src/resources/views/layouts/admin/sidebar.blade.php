@@ -16,7 +16,7 @@
 
                             <div class="collapse" id="collapseLayouts" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
                                 <nav class="sb-sidenav-menu-nested nav">
-                                    <a class="nav-link" href="#">Create job</a>
+                                    <a class="nav-link" href="{{ route('job.create')}}">Create job</a>
                                     <a class="nav-link" href="#">Your jobs</a>
                                 </nav>
                             </div>

@@ -7,13 +7,7 @@
 
             <h1>Post a job</h1>
             <form action="{{route('job.store')}}" method="POST" enctype="multipart/form-data">@csrf
-                <div class="form-group">
-                    <label for="title">Feature Image</label>
-                    <input type="file" name="feature_image" id="feature_image" class="form-control">
-                    @if($errors->has('feature_image'))
-                        <div class="error"> {{$errors->first('feature_image')}}  </div>
-                    @endif
-                </div>
+
                 <div class="form-group">
                     <label for="title">Title</label>
                     <input type="text" name="title" id="title" class="form-control">
@@ -39,11 +33,11 @@
                     <label>Job types</label>
                     <div class="form-check">
                         <input type="radio" class="form-check-input" name="job_type" id="Fulltime" value="Fulltime">
-                        <label for="Fulltime" class="form-check-label">Fulltime</label>
+                        <label for="Fulltime" class="form-check-label">Full-time</label>
                     </div>
                     <div class="form-check">
                         <input type="radio" class="form-check-input" name="job_type" id="Parttime" value="Parttime">
-                        <label for="Parttime" class="form-check-label">Parttime</label>
+                        <label for="Parttime" class="form-check-label">Part-time</label>
                     </div>
                     <div class="form-check">
                         <input type="radio" class="form-check-input" name="job_type" id="casual" value="Casual">
@@ -78,8 +72,15 @@
                         <div class="error"> {{$errors->first('date')}}  </div>
                     @endif
                 </div>
-                <div class="form-group mt-4">
-                    <button type="submit" class="btn btn-success">Post a job</button>
+                <div class="form-group">
+                    <label for="title">Feature Image</label>
+                    <input type="file" name="feature_image" id="feature_image" class="form-control">
+                    @if($errors->has('feature_image'))
+                        <div class="error"> {{$errors->first('feature_image')}}  </div>
+                    @endif
+                </div>
+                <div class="form-group mt-4 text-center">
+                    <button type="submit" class="btn btn-success btn-lg">Post</button>
                 </div>
 
             </form>

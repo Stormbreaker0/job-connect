@@ -48,6 +48,6 @@ class PostJobController extends Controller
         $post->slug = Str::slug($request->title) . '.' . Str::uuid(); // identificatore
         $post->save();
 
-        return redirect()->route('job.index')->with('success', 'Your job post has been posted');
+        return redirect()->route('dashboard')->with('success', 'Your job post has been posted');
     }
 }

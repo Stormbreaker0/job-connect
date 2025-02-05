@@ -18,13 +18,12 @@
 			<ol class="breadcrumb mb-4">
 				{{-- <li class="breadcrumb-item active">Hello, {{ Auth::user()->name }}</li> --}}
 				<li class="breadcrumb-item active">
-					@if(! Auth::user()->billing_ends)
 					@if(Auth::check() && Auth::user()->user_type == 'employer')
-						Your trial {{now()->format('Y-m-d') > Auth::user()->user_trial ? 'was expired': 'will expire'}} on {{Auth::user()->user_trial}}
-					@endif
-					@endif
-					@if(Auth::check() && Auth::user()->user_type == 'employer')
-						Your membership {{now()->format('Y-m-d') > Auth::user()->billing_ends ? 'was expired': 'will expire'}} on {{Auth::user()->billing_ends}}
+						@if(! Auth::user()->billing_ends)
+							Your trial {{ now()->format('Y-m-d') > Auth::user()->user_trial ? 'was expired' : 'will expire' }} on {{ Auth::user()->user_trial }}
+						@elseif(Auth::user()->billing_ends)
+							Your membership {{ now()->format('Y-m-d') > Auth::user()->billing_ends ? 'was expired' : 'will expire' }} on {{ Auth::user()->billing_ends }}
+						@endif
 					@endif
 				</li>
 			</ol>

@@ -38,14 +38,14 @@
                     @if(Auth::check())
                     <li class="nav-item dropdown">
                         <a class="dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                            @if(auth()->user()->profile_pic)
-                            <img src="{{ Storage::url(auth()->user()->profile_pic) }}" width="40" class="rounded-circle">
+                            @if(Auth::user()->profile_pic)
+                            <img src="{{ Storage::url(Auth::user()->profile_pic) }}" width="40" class="rounded-circle">
                             @else
                             <img src="https://placehold.co/400" class="rounded-circle" width="40">
                             @endif
                         </a>
                         <ul class="dropdown-menu">
-                            @if(auth()->user()->user_type === 'seeker')
+                            @if(Auth::user()->user_type === 'seeker')
                             <li class="nav-item">
                                 <a class="nav-link active" aria-current="page" href="{{ route('seeker.profile') }}">Profile</a>
                             </li>
@@ -106,7 +106,7 @@
                 </div>
             </div>
             <div class="mt-3">
-                <p>&copy; 2025 Job-Connect. All rights reserved.</p>
+                <p>&copy; <span id="currentYear"></span> Job-Connect. All rights reserved.</p>
             </div>
         </div>
     </footer>
@@ -117,6 +117,11 @@
         logout.addEventListener('click', function() {
             form.submit();
         })
+    </script>
+
+    <script>
+        let currentYear = document.getElementById('currentYear');
+        currentYear.textContent = new Date().getFullYear();
     </script>
 
 </body>

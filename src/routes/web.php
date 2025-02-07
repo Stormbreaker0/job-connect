@@ -7,6 +7,7 @@ use Illuminate\Foundation\Auth\EmailVerificationRequest;
 use App\Http\Middleware\CheckAuth;
 use App\Http\Controllers\SubscriptionController;
 use App\Http\Controllers\PostJobController;
+use App\Http\Middleware\isPremiumUser;
 
 Route::get('/', function () {
     return view('welcome');
@@ -26,27 +27,27 @@ Route::get('/email/verify/{id}/{hash}', function (EmailVerificationRequest $requ
 })->middleware(['auth', 'signed'])->name('verification.verify');
 
 
-Route::get('/register/seeker', [UserController::class, 'createSeeker'])->name('create.seeker');
+Route::get('/register/seeker', [UserController::class, 'createSeeker'])->name('create.seeker')->middleware(CheckAuth::class);
 Route::post('/register/seeker', [UserController::class, 'storeSeeker'])->name('store.seeker');
-Route::get('/register/employer', [UserController::class, 'createEmployer'])->name('create.employer');
+Route::get('/register/employer', [UserController::class, 'createEmployer'])->name('create.employer')->middleware(CheckAuth::class);
 Route::post('/register/employer', [UserController::class, 'storeEmployer'])->name('store.employer');
 
 // AUTHENTIFICATION
-Route::get('/login', [UserController::class, 'login'])->name('login');
+Route::get('/login', [UserController::class, 'login'])->name('login')->middleware(CheckAuth::class);
 Route::post('/login', [UserController::class, 'postLogin'])->name('login.post');
 Route::post('/logout', [UserController::class, 'logout'])->name('logout');
 
-// Route::get('user/profile', [UserController::class, 'profile'])->name('user.profile')->middleware('auth');
-// Route::post('user/profile', [UserController::class, 'update'])->name('user.update.profile')->middleware('auth');
-// Route::get('user/profile/seeker', [UserController::class, 'seekerProfile'])->name('seeker.profile')
-// ->middleware(['auth','verified']);
+// Profile User
+Route::get('user/profile', [UserController::class, 'profile'])->name('user.profile')->middleware('auth');
+Route::post('user/profile', [UserController::class, 'update'])->name('user.update.profile')->middleware('auth');
+Route::get('user/profile/seeker', [UserController::class, 'seekerProfile'])->name('seeker.profile')->middleware(['auth','verified']);
 
-// Route::get('user/job/applied', [UserController::class, 'jobApplied'])->name('job.applied')
-// ->middleware(['auth','verified']);
+Route::get('user/job/applied', [UserController::class, 'jobApplied'])->name('job.applied')
+->middleware(['auth','verified']);
 
 
-// Route::post('user/password', [UserController::class, 'changePassword'])->name('user.password')->middleware('auth');
-// Route::post('upload/resume', [UserController::class, 'uploadResume'])->name('upload.resume')->middleware('auth');
+Route::post('user/password', [UserController::class, 'changePassword'])->name('user.password')->middleware('auth');
+Route::post('upload/resume', [UserController::class, 'uploadResume'])->name('upload.resume')->middleware('auth');
 
 Route::get('/register/resend-verification', [DashboardController::class,'resendVerification'])
 ->name('/register.resend-verification');
@@ -54,7 +55,7 @@ Route::get('/register/resend-verification', [DashboardController::class,'resendV
 
 # DASHBOARD
 Route::get('/dashboard', [DashboardController::class, 'index'])
-->middleware('verified')
+->middleware(['verified', isPremiumUser::class])
 ->name('dashboard');
 
 Route::get('/verify', [DashboardController::class, 'verify'])->name('verification.notice');

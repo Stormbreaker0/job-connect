@@ -10,15 +10,20 @@
                 <div class="card-header">Login</div>
                 <form action="{{route('login.post')}}" method="post">@csrf
                     <div class="card-body">
+                        @if(session('error'))
+                            <div class="alert alert-danger">
+                                {{ session('error') }}
+                            </div>
+                        @endif
                         <div class="form-group">
-                            <label for="">Email</label>
-                            <input type="text" name="email" class="form-control">
+                            <label for="email">Email</label>
+                            <input type="text" name="email" class="form-control" value="{{ old('email') }}">
                             @if($errors->has('email'))
                             <span class="text-danger">{{ $errors->first('email')}}</span>
                             @endif
                         </div>
                         <div class="form-group">
-                            <label for="">Password</label>
+                            <label for="password">Password</label>
                             <input type="password" name="password" class="form-control">
                             @if($errors->has('password'))
                             <span class="text-danger">{{ $errors->first('password')}}</span>

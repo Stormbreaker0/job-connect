@@ -30,10 +30,15 @@
     </div>
 </div>
 <div class="container mt-5">
+    @if(!Auth::check())
     <section class="centered-content">
-        <p class="lead"><a href="/login"> <button class="btn btn-dark" style="margin-left: -150px;">Sign in</button></a> or Register
-            to manage your  profile, start applying jobs.</p>
+        <p class="lead">
+            <a href="/login">
+                <button class="btn btn-dark" style="margin-left: -150px;">Sign in</button>
+            </a>
+        </p>
     </section>
+    @endif
     <div class="d-flex justify-content-between mt-5">
         <h4>Recommended Jobs</h4>
 
@@ -112,84 +117,6 @@
     @endforeach
  
 </div>
-<footer class="text-white text-center text-lg-start bg-dark">
-    <!-- Grid container -->
-    <div class="container p-4">
-      <!--Grid row-->
-      <div class="row mt-4">
-        <!--Grid column-->
-        <div class="col-lg-4 col-md-12 mb-4 mb-md-0">
-          <h5 class="text-uppercase mb-4">About company</h5>
-
-          <p>
-          Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-          </p>
-
-          <p>
-            Magni quidem consequuntur, aliquid ipsum provident fugiat reiciendis quasi excepturi enim nam eos nihil ipsam, porro fugit, dolores minus necessitatibus molestias ab.
-          </p>
-
-       
-        </div>
-        <!--Grid column-->
-
-        <!--Grid column-->
-        <div class="col-lg-4 col-md-6 mb-4 mb-md-0">
-          <h5 class="text-uppercase mb-4 pb-1">Search something</h5>
-
-          <div class="form-outline form-white mb-4">
-            <input type="text" id="formControlLg" class="form-control form-control-lg" />
-            <label class="form-label" for="formControlLg">Search</label>
-          </div>
-
-          <ul class="fa-ul" style="margin-left: 1.65em;">
-            <li class="mb-3">
-              <span class="fa-li"><i class="fas fa-home"></i></span><span class="ms-2">Melbourne, Australia</span>
-            </li>
-            <li class="mb-3">
-              <span class="fa-li"><i class="fas fa-envelope"></i></span><span class="ms-2">info@techjobs.com</span>
-            </li>
-            <li class="mb-3">
-              <span class="fa-li"><i class="fas fa-phone"></i></span><span class="ms-2">+ 123456789</span>
-            </li>
-          </ul>
-        </div>
-        <!--Grid column-->
-
-        <!--Grid column-->
-        <div class="col-lg-4 col-md-6 mb-4 mb-md-0">
-          <h5 class="text-uppercase mb-4">Opening hours</h5>
-
-          <table class="table text-center text-white">
-            <tbody class="fw-normal">
-              <tr>
-                <td>Mon - Thu:</td>
-                <td>8am - 9pm</td>
-              </tr>
-              <tr>
-                <td>Fri - Sat:</td>
-                <td>8am - 1am</td>
-              </tr>
-              <tr>
-                <td>Sunday:</td>
-                <td>9am - 10pm</td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-        <!--Grid column-->
-      </div>
-      <!--Grid row-->
-    </div>
-    <!-- Grid container -->
-
-    <!-- Copyright -->
-    <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2);">
-      © 2023 Copyright:
-      <a class="text-white" href="https://mdbootstrap.com/">Tech jobs</a>
-    </div>
-    <!-- Copyright -->
-  </footer>
 <style>
     /* .Fulltime {
         background-color: green;

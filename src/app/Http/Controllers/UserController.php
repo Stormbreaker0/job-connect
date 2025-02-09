@@ -74,27 +74,30 @@ class UserController extends Controller
 
    // process login
    public function postLogin(LoginFormRequest $request)
-    {
+   {
         // $request->validate([
         //     'email' => 'required|email',
         //     'password' => 'required'
         // ]);
 
-        $credentails = $request->only('email', 'password');
+        $credentials = $request->only('email', 'password');
 
-        if(Auth::attempt($credentails)) {
-            if(!Auth::user()->email_verified_at)
-            {
-                return redirect()->to('/verify');
+        try {
+            if (Auth::attempt($credentials)) {
+                if (!Auth::user()->email_verified_at) {
+                    return redirect()->to('/verify');
+                }
+                if (Auth::user()->user_type == 'employer') {
+                    return redirect()->to('dashboard');
+                } else {
+                    return redirect()->to('/');
+                }
+            } else {
+                return back()->with('error', 'Wrong email or password');
             }
-            if(Auth::user()->user_type == 'employer') {
-                return redirect()->to('dashboard');
-            }else {
-                return redirect()->to('/');
-            }
+        } catch (\Exception $e) {
+            return back()->with('error', 'An error occurred while trying to log in. Please try again later.');
         }
-
-        return back()->with('error','Wrong email or password');
     }
 
     //logout
@@ -147,6 +150,22 @@ class UserController extends Controller
         $users =  User::with('listings')->where('id',Auth::user()->id)->get();
 
         return view('seeker.job-applied',compact('users'));
+    }
+
+
+    public function uploadResume(Request $request)
+    {
+        $request->validate([
+            'resume' => 'required|mimes:pdf,doc,docx',
+        ]);        
+
+        if($request->hasFile('resume')) {
+            $resume = $request->file('resume')->store('resume', 'public');   
+            User::find(Auth::user()->id)->update(['resume' => $resume]);
+
+            return back()->with('success','Your resume has been updated successfully');
+
+        }
     }
 
 }

@@ -83,7 +83,19 @@
         @yield('content')
     </main>
 
-    <footer class="bg-dark text-white mt-5 p-1 text-center">
+    <footer class="py-4 bg-light mt-auto">
+        <div class="container-fluid px-4">
+            <div class="d-flex align-items-center justify-content-between small">
+                <div class="text-muted">&copy; <span id="currentYear"></span> Job-Connect. All rights reserved.</div>
+                <div>
+                    <a href="#">Privacy Policy</a>
+                    &middot;
+                    <a href="#">Terms &amp; Conditions</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+    {{-- <footer class="bg-dark text-white mt-5 p-1 text-center">
         <div class="container">
             <div class="row">
                 <div class="col-md-4">
@@ -109,7 +121,7 @@
                 <p>&copy; <span id="currentYear"></span> Job-Connect. All rights reserved.</p>
             </div>
         </div>
-    </footer>
+    </footer> --}}
 
     <script>
         let logout = document.getElementById('logout');

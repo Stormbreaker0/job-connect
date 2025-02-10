@@ -30,7 +30,7 @@
 
                     <p class="card-text mt-4">Application closing date: {{$listing->application_deadline}}</p>
                     @if(Auth::check())
-                    @if(auth()->user()->resume)
+                    @if(Auth::user()->resume)
                     <form action="{{route('applicantion.submit',[$listing->id])}}" method="POST">@csrf
                         <button href="#" class="btn btn-dark btn-lg mt-3">Apply Now</button>
                     </form>

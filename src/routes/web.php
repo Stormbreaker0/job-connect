@@ -10,6 +10,7 @@ use App\Http\Controllers\SubscriptionController;
 use App\Http\Controllers\PostJobController;
 use App\Http\Middleware\isPremiumUser;
 use App\Http\Controllers\ApplicantController;
+use App\Http\Controllers\InfoPageController;
 
 
 /*
@@ -24,65 +25,87 @@ use App\Http\Controllers\ApplicantController;
 */
 
 
-// Route::get('/home', function () {
-//     return view('home');
-// });
+# Route::get('/home', function () {
+#     return view('home');
+# });
 
 
-// Email verification
-// Route::get('/email/verify', function () {
-//     redirect('/login');
-// })->middleware(['auth', 'signed'])->name('verification.verify');
+# Email verification
+# Route::get('/email/verify', function () {
+#     redirect('/login');
+# })->middleware(['auth', 'signed'])->name('verification.verify');
 
 
-Route::get('/',[JoblistingController::class, 'index'])->name('listing.index');
-Route::get('/company/{id}',[JoblistingController::class, 'company'])->name('company');
+Route::get('/', [JoblistingController::class, 'index'])->name('listing.index');
+Route::get('/company/{id}', [JoblistingController::class, 'company'])->name('company');
 
-Route::get('/jobs/{listing:slug}',[JoblistingController::class,'show'])->name('job.show');
+Route::get('/jobs/{listing:slug}', [JoblistingController::class, 'show'])->name('job.show');
 
-
-
-# Handler email verification
+# HANDLE EMAIL VERIFICATION
 Route::get('/email/verify/{id}/{hash}', function (EmailVerificationRequest $request) {
     $request->fulfill();
 
     return redirect('/login');
 })->middleware(['auth', 'signed'])->name('verification.verify');
 
+# EMAIL VERIFICATION NOTICE
+Route::get('/verify', [DashboardController::class, 'verify'])->name('verification.notice');
 
+
+# RESEND EMAIL VERIFICATION
+Route::get('/register/resend-verification', [DashboardController::class, 'resendVerification'])
+    ->name('/register.resend-verification');
+Route::get('/resend/verification/email', [DashboardController::class, 'resend'])->name('resend.email');
+
+
+# ABOUT-US & CONTACT-US ROUTES
+Route::get('/about', [InfoPageController::class, 'aboutUs'])->name('about');
+
+
+# PRIVACY POLICY ROUTES
+Route::get('/privacy', [InfoPageController::class, 'privacy'])->name('privacy');
+
+
+# TERMS OF SERVICE ROUTES
+Route::get('/terms', [InfoPageController::class, 'terms'])->name('terms');
+
+
+# REGISTER ROUTES
 Route::get('/register/seeker', [UserController::class, 'createSeeker'])->name('create.seeker')->middleware(CheckAuth::class);
 Route::post('/register/seeker', [UserController::class, 'storeSeeker'])->name('store.seeker');
 Route::get('/register/employer', [UserController::class, 'createEmployer'])->name('create.employer')->middleware(CheckAuth::class);
 Route::post('/register/employer', [UserController::class, 'storeEmployer'])->name('store.employer');
 
-// AUTHENTIFICATION
+
+# AUTHENTIFICATION ROUTES
 Route::get('/login', [UserController::class, 'login'])->name('login')->middleware(CheckAuth::class);
 Route::post('/login', [UserController::class, 'postLogin'])->name('login.post');
 Route::post('/logout', [UserController::class, 'logout'])->name('logout');
 
-// Profile User
+
+# PROFILE ROUTES
 Route::get('user/profile', [UserController::class, 'profile'])->name('user.profile')->middleware('auth');
 Route::post('user/profile', [UserController::class, 'update'])->name('user.update.profile')->middleware('auth');
 Route::get('user/profile/seeker', [UserController::class, 'seekerProfile'])->name('seeker.profile')->middleware(['auth', 'verified']);
 
+
+# JOB APPLICATION ROUTES
 Route::get('user/job/applied', [UserController::class, 'jobApplied'])->name('job.applied')
     ->middleware(['auth', 'verified']);
 
 
+# PASSWORD ROUTES
 Route::post('user/password', [UserController::class, 'changePassword'])->name('user.password')->middleware('auth');
+
+
+# UPLOAD RESUME ROUTES
 Route::post('upload/resume', [UserController::class, 'uploadResume'])->name('upload.resume')->middleware('auth');
 
-Route::get('/register/resend-verification', [DashboardController::class, 'resendVerification'])
-    ->name('/register.resend-verification');
 
-
-# DASHBOARD
+# DASHBOARD ROUTES
 Route::get('/dashboard', [DashboardController::class, 'index'])
     ->middleware(['verified', isPremiumUser::class])
     ->name('dashboard');
-
-Route::get('/verify', [DashboardController::class, 'verify'])->name('verification.notice');
-Route::get('/resend/verification/email', [DashboardController::class, 'resend'])->name('resend.email');
 
 
 # SUBSCRIPTION AND PAYMENT
@@ -105,9 +128,8 @@ Route::delete('job/{id}/delete', [PostJobController::class, 'destroy'])->name('j
 
 
 # APPLICATION ROUTES
-
-Route::get('applicants' ,[ApplicantController::class, 'index'])->name('applicants.index');
-Route::get('applicants/{listing:slug}' ,[ApplicantController::class, 'show'])->name('applicants.show');
+Route::get('applicants', [ApplicantController::class, 'index'])->name('applicants.index');
+Route::get('applicants/{listing:slug}', [ApplicantController::class, 'show'])->name('applicants.show');
 Route::post('shortlist/{listingId}/{userId}', [ApplicantController::class, 'shortlist'])
-->name('applicants.shortlist');
-Route::post('/applicantion/{listingId}/submit', [ApplicantController::class,'apply'])->name('applicantion.submit');
+    ->name('applicants.shortlist');
+Route::post('/applicantion/{listingId}/submit', [ApplicantController::class, 'apply'])->name('applicantion.submit');

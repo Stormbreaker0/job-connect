@@ -17,6 +17,14 @@
             flex: 1;
         }
     </style>
+
+    <style> 
+        body {
+            background: url('{{ asset('image/background.eps') }}') no-repeat center center fixed;
+            background-size: cover;
+            background-color: #f5f5f5;
+        }
+    </style>
 </head>
 
 <body>
@@ -26,14 +34,17 @@
 
     <nav class="navbar navbar-expand-lg bg-dark shadow-lg" data-bs-theme="dark">
         <div class="container">
-            <a class="navbar-brand" href="/">Job-Connect</a>
+            <a class="navbar-brand" href="/">
+                <img src={{asset('image/logo.jpg')}} alt="Job-Connect Logo" width="40" height="40" class="d-inline-block align-text-top">
+                Job-Connect
+            </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ms-auto">
                     <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="/">Home</a>
+                        <a class="nav-link" aria-current="page" href="/">Home</a>
                     </li>
                     @if(Auth::check())
                     <li class="nav-item dropdown">
@@ -47,10 +58,10 @@
                         <ul class="dropdown-menu">
                             @if(Auth::user()->user_type === 'seeker')
                             <li class="nav-item">
-                                <a class="nav-link active" aria-current="page" href="{{ route('seeker.profile') }}">Profile</a>
+                                <a class="nav-link" aria-current="page" href="{{ route('seeker.profile') }}">Profile</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link active" aria-current="page" href="{{ route('job.applied') }}">Job applied</a>
+                                <a class="nav-link" aria-current="page" href="{{ route('job.applied') }}">Job applied</a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link" id="logout" href="#">Logout</a>
@@ -71,9 +82,12 @@
                         <a class="nav-link" href="{{ route('create.seeker') }}">Job Seeker</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ route('create.employer') }}">Company</a>
+                        <a class="nav-link"  href="{{ route('create.employer') }}">Company</a>
                     </li>
                     @endif
+                    <li class="nav-item">
+                        <a class="nav-link" aria-current="page" href="{{ route('about') }}">About</a>
+                    </li>
                     <form id="form-logout" action="{{ route('logout') }}" method="post">@csrf </form>
                 </ul>
             </div>
@@ -88,40 +102,13 @@
             <div class="d-flex align-items-center justify-content-between small">
                 <div class="text-muted">&copy; <span id="currentYear"></span> Job-Connect. All rights reserved.</div>
                 <div>
-                    <a href="#">Privacy Policy</a>
+                    <a href="{{ route('privacy') }}">Privacy Policy</a>
                     &middot;
-                    <a href="#">Terms &amp; Conditions</a>
+                    <a href="{{ route('terms') }}">Terms &amp; Conditions</a>
                 </div>
             </div>
         </div>
     </footer>
-    {{-- <footer class="bg-dark text-white mt-5 p-1 text-center">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-4">
-                    <h5>About Us</h5>
-                    <p>Job-Connect is a leading job portal connecting job seekers with employers.</p>
-                </div>
-                <div class="col-md-4">
-                    <h5>Quick Links</h5>
-                    <ul class="list-unstyled">
-                        <li><a href="/" class="text-white">Home</a></li>
-                        <li><a href="{{ route('login') }}" class="text-white">Login</a></li>
-                        <li><a href="{{ route('create.seeker') }}" class="text-white">Job Seeker</a></li>
-                        <li><a href="{{ route('create.employer') }}" class="text-white">Company</a></li>
-                    </ul>
-                </div>
-                <div class="col-md-4">
-                    <h5>Contact Us</h5>
-                    <p>Email: support@joblinker.com</p>
-                    <p>Phone: +123 456 7890</p>
-                </div>
-            </div>
-            <div class="mt-3">
-                <p>&copy; <span id="currentYear"></span> Job-Connect. All rights reserved.</p>
-            </div>
-        </div>
-    </footer> --}}
 
     <script>
         let logout = document.getElementById('logout');

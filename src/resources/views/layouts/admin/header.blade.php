@@ -13,4 +13,12 @@
     <link rel="stylesheet" href="//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
     <!-- include summernote css/js -->
     <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.css" rel="stylesheet">
+
+    <style> 
+        body {
+            background: url('{{ asset('image/background.eps') }}') no-repeat center center fixed;
+            background-size: cover;
+            background-color: #f5f5f5;
+        }
+    </style>
 </head>

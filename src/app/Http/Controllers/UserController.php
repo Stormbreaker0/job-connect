@@ -36,7 +36,8 @@ class UserController extends Controller
             'email' => $request->email,
             'password' => bcrypt($request->password),
             'user_type' => self::JOB_SEEKER,
-            'user_trial' => now()->addWeek()
+            'user_trial' => now()->addWeek(),
+            'plan' => 'free'
         ]);
 
         Auth::login($user);
@@ -55,7 +56,8 @@ class UserController extends Controller
             'email' => request('email'),
             'password' => bcrypt($request->password),
             'user_type' => self::JOB_POSTER,
-            'user_trial' => now()->addWeek()
+            'user_trial' => now()->addWeek(),
+            'plan' => 'free'
         ]);
 
         Auth::login($user);

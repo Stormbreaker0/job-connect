@@ -1,5 +1,5 @@
 <x-mail::message>
-# Welcome to Job Linker!
+# Welcome to Job-Connect!
 
 Congratulations on subscribing to our service! We're excited to have you on board.
 

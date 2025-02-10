@@ -1,9 +1,7 @@
 <?php
-
 namespace App\Http\Controllers;
 
 use App\Mail\ShortlistMail;
-use Illuminate\Contracts\Mail\Mailable;
 use App\Models\Listing;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -26,21 +24,20 @@ class ApplicantController extends Controller
     {
         $this->authorize('view', $listing);
 
-        $listing = Listing::with('users')->where('slug',$listing->slug)->first();
+        $listing = Listing::with('users')->where('slug', $listing->slug)->first();
 
         return view('applicants.show', compact('listing'));
-
     }
 
     public function shortlist($listingId, $userId)
     {
         $listing = Listing::find($listingId);
         $user = User::find($userId);
-        if($listing) {
-            $listing->users()->updateExistingPivot($userId,['shortlisted' => true]);
+        if ($listing) {
+            $listing->users()->updateExistingPivot($userId, ['shortlisted' => true]);
             Mail::to($user->email)->queue(new ShortlistMail($user->name, $listing->title));
 
-            return back()->with('success','User is shortlisted successfully');
+            return back()->with('success', 'User is shortlisted successfully');
         }
 
         return back();
@@ -48,9 +45,8 @@ class ApplicantController extends Controller
 
     public function apply($listingId)
     {
-      $user = Auth::user();
-      $user->listings()->syncWithoutDetaching($listingId);
-      return back()->with('success','Youe application was successfully submited');
+        $user = Auth::user();
+        $user->listings()->syncWithoutDetaching($listingId);
+        return back()->with('success', 'Your application was successfully submitted');
     }
-
 }

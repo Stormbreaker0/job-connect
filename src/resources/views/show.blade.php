@@ -19,7 +19,7 @@
                     </div>
                     @endif
                     <span class="badge bg-primary">{{$listing->job_type}}</span>
-                    <p>Salary: ${{number_format($listing->salary,2)}}</p>
+                    <p>Salary: €{{number_format($listing->salary,2)}}</p>
                     Address: {{$listing->address}} 
 
                     <h4 class="mt-4">Description</h4>
@@ -43,7 +43,7 @@
                     </form>
                     @endif
                     @else
-                    <p>Please login to apply</p>
+                    <p>Please <a href="{{ route('login')}}">login </a> to apply</p>
                     @endif
 
                     <!-- Modal -->

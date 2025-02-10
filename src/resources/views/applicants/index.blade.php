@@ -27,7 +27,7 @@
                             <td>{{$listing->title}}</td>
                             <td>{{$listing->created_at->format('Y-m-d')}}</td>
                             <td>{{$listing->users_count}}</td>
-                            <td>View</td>
+                            <td><a href="{{route('job.show',$listing->slug)}}">view</a></td>
                             <td><a href="{{route('applicants.show',$listing->slug)}}">view</a></td>
                         </tr>
         

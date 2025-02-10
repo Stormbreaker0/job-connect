@@ -46,6 +46,9 @@
                     <li class="nav-item">
                         <a class="nav-link" aria-current="page" href="/">Home</a>
                     </li>
+                    <li class="nav-item">
+                        <a class="nav-link" aria-current="page" href="{{ route('about') }}">About</a>
+                    </li>
                     @if(Auth::check())
                     <li class="nav-item dropdown">
                         <a class="dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -70,6 +73,9 @@
                             <li class="nav-item">
                                 <a class="nav-link" href="{{ route('dashboard') }}">Dashboard</a>
                             </li>
+                            <li class="nav-item">
+                                <a class="nav-link" id="logout" href="#">Logout</a>
+                            </li>
                             @endif
                         </ul>
                     </li>
@@ -85,9 +91,7 @@
                         <a class="nav-link"  href="{{ route('create.employer') }}">Company</a>
                     </li>
                     @endif
-                    <li class="nav-item">
-                        <a class="nav-link" aria-current="page" href="{{ route('about') }}">About</a>
-                    </li>
+                    
                     <form id="form-logout" action="{{ route('logout') }}" method="post">@csrf </form>
                 </ul>
             </div>

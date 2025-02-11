@@ -13,9 +13,9 @@
                     <div class="d-flex flex-row align-items-center">
                         <div class="icon"> 
                             @if($employer->profile_pic)
-                           <a href="{{route('company',[$employer->id])}}"><img src="{{Storage::url($employer->profile_pic)}}" width="50"></a>
+                           <a href="{{route('company',[$employer->id])}}"><img src="{{Storage::url($employer->profile_pic)}}" width="50" height="50"></a>
                             @else 
-                            <a href="{{route('company',[$employer->id])}}"><img src="icons8-amazon-60.png"></a>
+                            <a href="{{route('company',[$employer->id])}}"><img src="{{asset('image/default-company.png')}}" width="50" height="50"></a>
                             @endif
                         </div>
                         <div class="ms-2 c-details">

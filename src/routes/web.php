@@ -11,7 +11,8 @@ use App\Http\Controllers\PostJobController;
 use App\Http\Middleware\isPremiumUser;
 use App\Http\Controllers\ApplicantController;
 use App\Http\Controllers\InfoPageController;
-
+use App\Http\Controllers\CookieController;
+use App\Http\Middleware\SetUserCookie;
 
 /*
 |--------------------------------------------------------------------------
@@ -38,8 +39,6 @@ use App\Http\Controllers\InfoPageController;
 
 Route::get('/', [JoblistingController::class, 'index'])->name('listing.index');
 Route::get('/company/{id}', [JoblistingController::class, 'company'])->name('company');
-
-Route::get('/jobs/{listing:slug}', [JoblistingController::class, 'show'])->name('job.show');
 
 # HANDLE EMAIL VERIFICATION
 Route::get('/email/verify/{id}/{hash}', function (EmailVerificationRequest $request) {
@@ -79,7 +78,7 @@ Route::post('/register/employer', [UserController::class, 'storeEmployer'])->nam
 
 # AUTHENTIFICATION ROUTES
 Route::get('/login', [UserController::class, 'login'])->name('login')->middleware(CheckAuth::class);
-Route::post('/login', [UserController::class, 'postLogin'])->name('login.post');
+Route::post('/login', [UserController::class, 'postLogin'])->name('login.post')->middleware(SetUserCookie::class);
 Route::post('/logout', [UserController::class, 'logout'])->name('logout');
 
 
@@ -124,6 +123,8 @@ Route::get('job/{listing}/edit', [PostJobController::class, 'edit'])->name('job.
 Route::put('job/{id}/edit', [PostJobController::class, 'update'])->name('job.update');
 Route::get('job', [PostJobController::class, 'index'])->name('job.index');
 Route::delete('job/{id}/delete', [PostJobController::class, 'destroy'])->name('job.delete');
+
+Route::get('/jobs/{listing:slug}', [JoblistingController::class, 'show'])->name('job.show');
 
 
 

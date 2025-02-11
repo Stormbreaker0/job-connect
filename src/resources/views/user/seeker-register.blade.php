@@ -37,6 +37,13 @@
                             <span class="text-danger">{{ $errors->first('password')}}</span>
                             @endif
                         </div>
+                        <div class="form-group">
+                            <label for="">Summary</label>
+                            <input type="about" name="about" class="form-control">
+                            @if($errors->has('about'))
+                            <span class="text-danger">{{ $errors->first('about')}}</span>
+                            @endif
+                        </div>
                         <br>
                         <div class="form-group mb-5 mt-3">
                             <button class="btn btn-dark" id="btnRegister">Register</button>

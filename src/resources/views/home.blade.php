@@ -82,7 +82,7 @@
                     <div class="d-flex flex-row align-items-center justify-content-center">
                         <small class="ml-1">{{$job->address}}</small>
                     </div>
-                    <div class="d-flex justify-content-between mt-3"> <span>${{number_format($job->salary,2)}}</span>
+                    <div class="d-flex justify-content-between mt-3"> <span>€{{number_format($job->salary,2)}}</span>
                         <a href="{{route('job.show',[$job->slug])}}"><button class="btn btn-dark">Apply Now</button> </a>
                     </div>
                 </div>
@@ -104,7 +104,7 @@
                 <div class="row flex-fill">
                     <div class="col-sm-5">
                         <h4 class="h5">{{$listing->title}}</h4>
-                        <span class="badge bg-secondary">{{$listing->job_type}}</span> <span class="badge bg-success">${{number_format($listing->salary,2)}}</span>
+                        <span class="badge bg-secondary">{{$listing->job_type}}</span> <span class="badge bg-success">€{{number_format($listing->salary,2)}}</span>
                     </div>
                     
                     <div class="col-sm-7 text-lg-end">

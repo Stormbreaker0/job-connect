@@ -24,6 +24,10 @@
                     <label for="name">Company name</label>
                     <input type="text" class="form-control" name="name" value="{{Auth::user()->name}}">
                 </div>
+                <div class="form-group">
+                    <label for="name">Summary</label>
+                    <input type="text" class="form-control" name="about" value="{{Auth::user()->about}}">
+                </div>
                 <div class="form-group mt-4">
                     <button class="btn btn-success" type="submit">Update</button>
                 </div>

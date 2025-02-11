@@ -7,11 +7,11 @@
         <div class="col-md-6">
             <h1>Looking for an employee?</h1>
             <h3>Please create an account</h3>
-            <img src={{asset('image/register.jpg')}} class="img-responsibe" width="600">
+            <img src={{asset('image/register.jpg')}} class="img-responsibe" width="580">
         </div>
 
-        <div class="col-md-6">
-            <div class="card" id="card">
+        <div class="col-md-6 mt-5 mb-5">
+            <div class="card" id="card" style="margin-top:50px;">
                 <div class="card-header">Employer Registration</div>
                 <form action="#" method="post" id="registrationForm">
                     <div class="card-body">

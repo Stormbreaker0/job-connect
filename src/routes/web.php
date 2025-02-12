@@ -36,6 +36,9 @@ use App\Http\Middleware\SetUserCookie;
 # })->middleware(['auth', 'signed'])->name('verification.verify');
 
 
+Route::get('/welcome', [UserController::class, 'welcome'])->name('welcome');
+
+
 Route::get('/', [JoblistingController::class, 'index'])->name('listing.index');
 Route::get('/company/{id}', [JoblistingController::class, 'company'])->name('company');
 

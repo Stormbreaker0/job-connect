@@ -25,4 +25,9 @@ export default defineConfig({
             vue: 'vue/dist/vue.esm-bundler.js',
         },
     },
+    server: {
+        host: '0.0.0.0', // Exposes the app to the network
+        port: 5173,       // Optional: you can change the port if you want
+        open: false         // Optional: open the app automatically in the browser
+      },
 });

@@ -13,7 +13,7 @@
     <link rel="stylesheet" href="//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
     <!-- include summernote css/js -->
     <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.css" rel="stylesheet">
-
+    @vite('resources/js/app.js')
     <style> 
         body {
             background: url('{{ asset('image/background.eps') }}') no-repeat center center fixed;

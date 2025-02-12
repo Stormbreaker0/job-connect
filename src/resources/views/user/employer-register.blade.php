@@ -81,7 +81,7 @@
         if(response.ok) {
             return response.json();
         }else{
-            throw new Errror('Error')
+            throw new Error('Error')
         }
     }).then(data=> {
         button.innerHTML = 'Register'
@@ -95,12 +95,11 @@
        
     })
 
-
 })
 </script>
 <style> 
     body {
-        background: url('{{ asset('image/login-background.jpg') }}') no-repeat center center fixed;
+        background: url('{{ asset('image/registration-background.jpg') }}') no-repeat center center fixed;
         background-size: cover;
         background-color: #f5f5f5;
     }

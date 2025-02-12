@@ -11,7 +11,6 @@ use App\Http\Controllers\PostJobController;
 use App\Http\Middleware\isPremiumUser;
 use App\Http\Controllers\ApplicantController;
 use App\Http\Controllers\InfoPageController;
-use App\Http\Controllers\CookieController;
 use App\Http\Middleware\SetUserCookie;
 
 /*
@@ -85,7 +84,7 @@ Route::post('/logout', [UserController::class, 'logout'])->name('logout');
 # PROFILE ROUTES
 Route::get('user/profile', [UserController::class, 'profile'])->name('user.profile')->middleware('auth');
 Route::post('user/profile', [UserController::class, 'update'])->name('user.update.profile')->middleware('auth');
-Route::get('user/profile/seeker', [UserController::class, 'seekerProfile'])->name('seeker.profile')->middleware(['auth']);
+Route::get('user/profile/seeker', [UserController::class, 'seekerProfile'])->name('seeker.profile')->middleware(['auth', 'verified']);
 
 
 # JOB APPLICATION ROUTES

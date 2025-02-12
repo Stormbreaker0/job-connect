@@ -78,7 +78,7 @@
         if(response.ok) {
             return response.json();
         }else{
-            throw new Errror('Error')
+            throw new Error('Error')
         }
     }).then(data=> {
         button.innerHTML = 'Register'
@@ -90,15 +90,13 @@
         button.innerHTML = 'Register'
         button.disabled = false
         messageDiv.innerHTML = '<div class="alert alert-danger">Something went wrong. Please try again</div>'
-       
     })
-
 
 })
 </script>
 <style> 
     body {
-        background: url('{{ asset('image/login-background.jpg') }}') no-repeat center center fixed;
+        background: url('{{ asset('image/registration-background.jpg') }}') no-repeat center center fixed;
         background-size: cover;
         background-color: #f5f5f5;
     }

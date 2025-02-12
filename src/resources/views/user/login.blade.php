@@ -42,7 +42,6 @@
 body {
     background: url('{{ asset('image/login-background.jpg') }}') no-repeat center center fixed;
     background-size: cover;
-    background-color: #f5f5f5;
 }
 </style>
 

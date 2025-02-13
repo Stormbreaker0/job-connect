@@ -36,11 +36,15 @@ class PostJobController extends Controller
     }
 
     public function store(PostJobFormRequest $request)
-    {
-        $this->job->store($request);
+{
+    $this->job->store($request);
 
-        return redirect()->route('job.index')->with('success', 'Your job post has been posted');
+    if ($request->ajax()) {
+        return response()->json(['success' => 'Your job post has been posted'], 200);
     }
+    //return redirect()->route('job.index')->with('success', 'Your job post has been posted');
+}
+
 
     public function edit(Listing $listing)
     {

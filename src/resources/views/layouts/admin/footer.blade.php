@@ -27,3 +27,7 @@
     $('.summernote').summernote();
   });
 </script>
+<script>
+  let currentYear = document.getElementById('currentYear');
+  currentYear.textContent = new Date().getFullYear();
+</script>

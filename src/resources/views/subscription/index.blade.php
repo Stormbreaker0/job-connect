@@ -26,7 +26,7 @@
                 <div class="card" style="width: 18rem;">
                     <div class="card-body">
                       <h5 class="card-title">Monthly — €29.99</h5>
-                      <p class="card-text">Enjoy a full month of access to all job listings. Ideal for those who need more time to find the perfect job.</p>
+                      <p class="card-text">Enjoy a full month of access, ideal for those who need more time to find the perfect candidate.</p>
                     </div>
                     <ul class="list-group list-group-flush">
                       <li class="list-group-item">Access to all job listings</li>
@@ -44,7 +44,7 @@
                 <div class="card" style="width: 18rem;">
                     <div class="card-body">
                       <h5 class="card-title">Yearly — €149.99</h5>
-                      <p class="card-text">Get a full year of access to all job listings. Best value for long-term job seekers.</p>
+                      <p class="card-text">Get a full year of access to all job listings. Best value for long-term employers</p>
                     </div>
                     <ul class="list-group list-group-flush">
                       <li class="list-group-item">Access to all job listings</li>

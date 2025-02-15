@@ -23,7 +23,7 @@ class EditJobFormRequest extends FormRequest
     {
         return [
             'title' => 'required|min:5',
-            'feature_image'=> 'mimes:png,jpg,jpeg|max:2048',
+            'feature_image'=> 'required|mimes:jpeg,jpg,png|max:5120',
             'description' => 'required|min:10',
             'roles' => 'required|min:10',
             'job_type'=>'required',

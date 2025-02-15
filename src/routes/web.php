@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Route;
 use Illuminate\Foundation\Auth\EmailVerificationRequest;
 use App\Http\Middleware\CheckAuth;
 use App\Http\Controllers\SubscriptionController;
+use App\Http\Controllers\FileUploadController;
 use App\Http\Controllers\PostJobController;
 use App\Http\Middleware\isPremiumUser;
 use App\Http\Controllers\ApplicantController;
@@ -101,6 +102,7 @@ Route::post('user/password', [UserController::class, 'changePassword'])->name('u
 
 # UPLOAD RESUME ROUTES
 Route::post('upload/resume', [UserController::class, 'uploadResume'])->name('upload.resume')->middleware('auth');
+Route::post('/resume/upload',[FileUploadController::class, 'store'])->middleware('auth');
 
 
 # DASHBOARD ROUTES

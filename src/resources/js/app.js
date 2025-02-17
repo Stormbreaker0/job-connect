@@ -17,8 +17,12 @@ const app = createApp({});
 
 import ExampleComponent from './components/ExampleComponent.vue';
 import FormComponent from './components/FormComponent.vue';
+import Navbar from './components/Navbar.vue';
+
 app.component('example-component', ExampleComponent);
 app.component('form-component', FormComponent);
+
+app.component('navbar', Navbar);
 /**
  * The following block of code may be used to automatically register your
  * Vue components. It will recursively scan this directory for the Vue

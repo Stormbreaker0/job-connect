@@ -91,11 +91,6 @@ Route::post('user/profile', [UserController::class, 'update'])->name('user.updat
 Route::get('user/profile/seeker', [UserController::class, 'seekerProfile'])->name('seeker.profile')->middleware(['auth', 'verified']);
 
 
-# JOB APPLICATION ROUTES
-Route::get('user/job/applied', [UserController::class, 'jobApplied'])->name('job.applied')
-    ->middleware(['auth', 'verified']);
-
-
 # PASSWORD ROUTES
 Route::post('user/password', [UserController::class, 'changePassword'])->name('user.password')->middleware('auth');
 
@@ -127,8 +122,12 @@ Route::get('job/{listing}/edit', [PostJobController::class, 'edit'])->name('job.
 Route::put('job/{id}/edit', [PostJobController::class, 'update'])->name('job.update');
 Route::get('job', [PostJobController::class, 'index'])->name('job.index');
 Route::delete('job/{id}/delete', [PostJobController::class, 'destroy'])->name('job.delete');
-
 Route::get('/jobs/{listing:slug}', [JoblistingController::class, 'show'])->name('job.show');
+
+# JOB APPLICATION ROUTES
+Route::get('user/job/applied', [UserController::class, 'jobApplied'])->name('job.applied')
+    ->middleware(['auth', 'verified']);
+
 
 
 

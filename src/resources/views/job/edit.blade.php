@@ -4,14 +4,13 @@
 <div class="container mt-5">
     <div class="row justify-content-center">
         <div class="col-md-8 mt-5">
-
             <h1>Update a job</h1>
             @if(Session::has('success'))
                 <div class="alert alert-success">{{Session::get('success')}}</div>
             @endif
-            <form action="{{route('job.update',[$listing->id])}}" method="POST" enctype="multipart/form-data">@csrf
+            <form id="update-job-form" action="{{route('job.update',[$listing->id])}}" method="POST" enctype="multipart/form-data">@csrf
             @method('PUT')    
-            <div class="form-group">
+                <div class="form-group">
                     <label for="title">Feature Image</label>
                     <input type="file" name="feature_image" id="feature_image" class="form-control">
                     @if($errors->has('feature_image'))
@@ -33,8 +32,8 @@
                     @endif
                 </div>
                 <div class="form-group">
-                    <label for="description">Roles and Responsibility</label>
-                    <textarea id="description" name="roles" class="form-control summernote">{{$listing->roles}}</textarea>
+                    <label for="roles">Roles and Responsibility</label>
+                    <textarea id="roles" name="roles" class="form-control summernote">{{$listing->roles}}</textarea>
                     @if($errors->has('roles'))
                         <div class="error"> {{$errors->first('roles')}}  </div>
                     @endif
@@ -73,7 +72,7 @@
                     @endif
                 </div>
                 <div class="form-group">
-                    <label for="address">Salary</label>
+                    <label for="salary">Salary</label>
                     <input type="text" name="salary" id="salary" class="form-control" value="{{$listing->salary}}">
                     @if($errors->has('salary'))
                         <div class="error"> {{$errors->first('salary')}}  </div>
@@ -81,15 +80,14 @@
                 </div>
                 <div class="form-group">
                     <label for="date">Application closing date</label>
-                    <input type="text" name="date" id="datepicker" class="form-control" value="{{$listing->application_deadline}}">
+                    <input type="date" name="application_deadline" id="datepicker" class="form-control" value="{{$listing->application_deadline}}">
                     @if($errors->has('date'))
                         <div class="error"> {{$errors->first('date')}}  </div>
                     @endif
                 </div>
                 <div class="form-group mt-4">
-                    <button type="submit" class="btn btn-success">Update a job</button>
+                    <button type="submit" class="btn btn-success">Update</button>
                 </div>
-
             </form>
         </div>
     </div>
@@ -104,3 +102,33 @@
     }
 </style>
 @ensection
+
+<!-- Include jQuery -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+$(document).ready(function(){
+    $('#update-job-form').on('submit', function(e){
+        e.preventDefault();
+        var formData = new FormData(this);
+        // console.log(formData);
+        $.ajax({
+            type: 'POST',
+            url: "{{route('job.update',[$listing->id])}}",
+            data: formData,
+            processData: false,
+            contentType: false,
+            success: function(response){
+                if(response.success){
+                    alert('Job updated successfully');
+                    // location.reload();
+                } else {
+                    alert('Failed to update job');
+                }
+            },
+            error: function(response){
+                alert('Error: ' + response.responseText);
+            }
+        });
+    });
+});
+</script>

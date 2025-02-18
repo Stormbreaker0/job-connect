@@ -55,8 +55,12 @@ class PostJobController extends Controller
     { 
         $this->job->updatePost($id, $request);
 
+        if ($request->ajax()) {
+            return response()->json(['success' => true]);
+        }
         return back()->with('success', 'Your job post has been successfully updated');
     }
+
 
     public function destroy($id)
     {

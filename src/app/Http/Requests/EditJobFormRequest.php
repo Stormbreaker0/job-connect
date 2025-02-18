@@ -28,7 +28,7 @@ class EditJobFormRequest extends FormRequest
             'roles' => 'required|min:10',
             'job_type'=>'required',
             'address'=>'required',
-            'application_deadline'=>'required',
+            'application_deadline'=>'required|date|after:today',
             'salary'=> 'required'
         ];
     }

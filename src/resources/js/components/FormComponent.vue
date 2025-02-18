@@ -141,10 +141,10 @@ export default {
   },
 };
 </script>
-
+<!-- 
 <style>
 .error {
   color: red;
   font-weight: bold;
 }
-</style>
+</style> -->

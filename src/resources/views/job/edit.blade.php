@@ -81,7 +81,7 @@
                 <div class="form-group">
                     <label for="date">Application closing date</label>
                     <input type="date" name="application_deadline" id="datepicker" class="form-control" value="{{$listing->application_deadline}}">
-                    @if($errors->has('date'))
+                    @if($errors->has('application_deadline'))
                         <div class="error"> {{$errors->first('date')}}  </div>
                     @endif
                 </div>

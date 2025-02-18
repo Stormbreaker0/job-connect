@@ -39,7 +39,7 @@ class JobPost
         $dateWithoutTimezone = substr($dateString, 0, strpos($dateString, ' GMT'));
 
         // Convert the date string to a valid 'Y-m-d' format
-        $this->listing->application_deadline = \Carbon\Carbon::parse($dateWithoutTimezone)->format('Y-m-d');
+        $this->listing->application_deadline = $dateString;
 
         $this->listing->salary = $data['salary'];
         $this->listing->slug = Str::slug($data['title']) . '.' . Str::uuid();

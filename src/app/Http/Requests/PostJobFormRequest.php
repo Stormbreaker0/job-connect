@@ -27,7 +27,7 @@ class PostJobFormRequest extends FormRequest
             'roles' => 'required|min:10',
             'job_type' => 'required',
             'address' => 'required',
-            'date' => 'required',
+            'date' => 'required|date|after:today',
             'salary' => 'required',
             'feature_image' => 'required|mimes:jpeg,jpg,png|max:5120',
         ];

@@ -85,14 +85,14 @@ Route::post('/login', [UserController::class, 'postLogin'])->name('login.post')-
 Route::post('/logout', [UserController::class, 'logout'])->name('logout');
 
 
+# PASSWORD ROUTES
+Route::post('user/password', [UserController::class, 'changePassword'])->name('user.password')->middleware('auth');
+
+
 # PROFILE ROUTES
 Route::get('user/profile', [UserController::class, 'profile'])->name('user.profile')->middleware('auth');
 Route::post('user/profile', [UserController::class, 'update'])->name('user.update.profile')->middleware('auth');
 Route::get('user/profile/seeker', [UserController::class, 'seekerProfile'])->name('seeker.profile')->middleware(['auth', 'verified']);
-
-
-# PASSWORD ROUTES
-Route::post('user/password', [UserController::class, 'changePassword'])->name('user.password')->middleware('auth');
 
 
 # UPLOAD RESUME ROUTES
@@ -124,14 +124,13 @@ Route::get('job', [PostJobController::class, 'index'])->name('job.index');
 Route::delete('job/{id}/delete', [PostJobController::class, 'destroy'])->name('job.delete');
 Route::get('/jobs/{listing:slug}', [JoblistingController::class, 'show'])->name('job.show');
 
+
 # JOB APPLICATION ROUTES
 Route::get('user/job/applied', [UserController::class, 'jobApplied'])->name('job.applied')
     ->middleware(['auth', 'verified']);
 
 
-
-
-# APPLICATION ROUTES
+# APPLY ROUTES
 Route::get('applicants', [ApplicantController::class, 'index'])->name('applicants.index');
 Route::get('applicants/{listing:slug}', [ApplicantController::class, 'show'])->name('applicants.show');
 Route::post('shortlist/{listingId}/{userId}', [ApplicantController::class, 'shortlist'])

@@ -73,7 +73,7 @@
     </div>
     <div class="row mt-2 g-1">
         @foreach($jobs as $job)
-        <div class="col-md-3">
+        <div class="col-md-5">
             <div class="card p-2 {{$job->job_type}}">
                 <div class="text-right"> <small class="badge text-bg-info">{{$job->job_type}}</small> </div>
                 <div class="text-center mt-2 p-3"> <img class="rounded-circle" width="50" src="{{Storage::url($job->profile->profile_pic)}}" width="100" /> <br>

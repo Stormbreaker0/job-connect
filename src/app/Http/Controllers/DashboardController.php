@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 
-use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Routing\Controller;

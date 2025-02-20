@@ -132,8 +132,12 @@ class UserController extends Controller
     }
 
     // Change password
-    public function changePassword(changePasswordFormRequest $request)
+    public function changePassword(Request $request)
     {
+         $request->validate([
+            'current_password' => ['required', 'current_password'],
+            'password' => ['required', 'min:8', 'confirmed', 'different:current_password']
+        ]);
         $user = Auth::user();
         $user->password = Hash::make($request->password);
         $user->save();

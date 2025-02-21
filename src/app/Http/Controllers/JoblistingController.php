@@ -41,7 +41,7 @@ class JoblistingController extends Controller
 
         $jobs = $listings->with('profile')->get();
 
-        return view('home',compact('jobs'));
+        return view('home', compact('jobs'));
     }
 
     public function show(Listing $listing)

@@ -17,13 +17,17 @@
                 <div class="form-group">
                     <label for="name">Profile image</label>
                     <input type="file" class="form-control" id="name" name="profile_pic">
-                    @if(auth()->user()->profile_pic)
-                    <img src="{{Storage::url(auth()->user()->profile_pic)}}" width="150" class="mt-3">
+                    @if(Auth::user()->profile_pic)
+                    <img src="{{Storage::url(Auth::user()->profile_pic)}}" width="150" class="mt-3">
                     @endif
                 </div>
                 <div class="form-group">
                     <label for="name">Your name</label>
-                    <input type="text" class="form-control" name="name" value="{{auth()->user()->name}}">
+                    <input type="text" class="form-control" name="name" value="{{Auth::user()->name}}">
+                </div>
+                <div class="form-group">
+                    <label for="name">Summary</label>
+                    <input type="text" class="form-control" name="about" value="{{Auth::user()->about}}">
                 </div>
                 <div class="form-group mt-4">
                     <button class="btn btn-success" type="submit">Update</button>
